@@ -76,7 +76,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void save(EmployeeDTO employeeDTO) {
 
-        System.out.println("当前线程id"+Thread.currentThread().getId());
+        System.out.println("当前线程id" + Thread.currentThread().getId());
 
         Employee employee = new Employee();
 
@@ -104,19 +104,41 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * 分页查询
+     *
      * @param employeePageQueryDTO
      * @return
      */
     @Override
     public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
 
-        PageHelper.startPage(employeePageQueryDTO.getPage(),employeePageQueryDTO.getPageSize());
+        PageHelper.startPage(employeePageQueryDTO.getPage(), employeePageQueryDTO.getPageSize());
 
-        Page<Employee> page=employeeMapper.pageQuery(employeePageQueryDTO);
+        Page<Employee> page = employeeMapper.pageQuery(employeePageQueryDTO);
         final long total = page.getTotal();
         final List<Employee> records = page.getResult();
 
         return new PageResult(total, records);
+    }
+
+    /**
+     * 启用禁用员工账号
+     *
+     * @param status
+     * @param id
+     */
+    @Override
+    public void startOrStop(Integer status, Long id) {
+
+      /*  final Employee employee = new Employee();
+        employee.setStatus(status);
+        employee.setId(id);*/
+        final Employee employee = Employee.builder()
+                .status(status)
+                .id(id)
+                .updateTime(LocalDateTime.now())
+                .updateUser(BaseContext.getCurrentId())
+                .build();
+        employeeMapper.update(employee);
     }
 
 
