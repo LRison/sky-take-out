@@ -27,52 +27,68 @@ public class CategoryController {
 
     /**
      * 新增分类
+     *
      * @param categoryDTO
      * @return
      */
     @ApiOperation("新增分类")
     @PostMapping
-    public Result save(@RequestBody CategoryDTO categoryDTO){
+    public Result save(@RequestBody CategoryDTO categoryDTO) {
 
-        log.info("新增分类{}",categoryDTO);
-       categoryService.save(categoryDTO);
+        log.info("新增分类{}", categoryDTO);
+        categoryService.save(categoryDTO);
 
-        return  Result.success();
+        return Result.success();
     }
 
     /**
      * 分页分类查询
+     *
      * @param categoryPageQueryDTO
      * @return
      */
     @GetMapping("/page")
     @ApiOperation("分类分页查询")
-    public Result<PageResult> page(CategoryPageQueryDTO categoryPageQueryDTO){
-        log.info("分类分页查询:{}",categoryPageQueryDTO);
+    public Result<PageResult> page(CategoryPageQueryDTO categoryPageQueryDTO) {
+        log.info("分类分页查询:{}", categoryPageQueryDTO);
 
-       PageResult pageResult = categoryService.pageQuery(categoryPageQueryDTO);
+        PageResult pageResult = categoryService.pageQuery(categoryPageQueryDTO);
 
-       return Result.success(pageResult);
+        return Result.success(pageResult);
 
     }
 
+    /**
+     * 启用禁用管理
+     *
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    @ApiOperation("启用禁用状态管理")
+    public Result status(@PathVariable("status") Integer status, Long id) {
+        log.info("启用禁用状态管理:{},{}", id, status);
 
+        categoryService.status(status, id);
+        return Result.success();
+    }
 
+    /**
+     * 根据id删除分类菜品
+     *
+     * @param id
+     * @return
+     */
+    @DeleteMapping
+    @ApiOperation("根据id删除分类")
+    public Result deleteById(Long id) {
 
+        log.info("删除菜品的id:{}", id);
+        categoryService.deleteById(id);
+        return Result.success();
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-//    public Result<>
 
 
 

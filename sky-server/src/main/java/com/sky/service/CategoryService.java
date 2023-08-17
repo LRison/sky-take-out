@@ -21,4 +21,22 @@ public interface CategoryService {
      * @return
      */
     PageResult pageQuery(CategoryPageQueryDTO categoryPageQueryDTO);
+
+    /**
+     * 启用禁用管理
+     * @param status
+     * @param id
+     */
+    /**
+     * 启用禁用分类
+     * @param status
+     * @param id
+     */
+    void status(Integer status, Long id);
+
+    /**
+     * 根据id删除分类
+     * @param id
+     */
+    void deleteById(Long id);
 }
