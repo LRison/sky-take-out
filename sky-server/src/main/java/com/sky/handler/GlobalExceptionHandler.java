@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * sql异常,处理新增已存在的用户
+     * sql异常,处理新增已存在的数据
      * @param exception
      * @return
      */
