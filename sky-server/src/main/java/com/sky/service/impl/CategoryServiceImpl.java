@@ -113,4 +113,28 @@ public class CategoryServiceImpl implements CategoryService {
         //以上都没有关联,可删除
         categoryMapper.deleteById(id);
     }
+
+    /**
+     * 修改分类
+     * @param categoryDTO
+     */
+    @Override
+    public void update(CategoryDTO categoryDTO) {
+        final Category category = new Category();
+        BeanUtils.copyProperties(categoryDTO,category);
+        category.setUpdateUser(BaseContext.getCurrentId());
+        category.setUpdateTime(LocalDateTime.now());
+        categoryMapper.update(category);
+
+    }
+
+    /**
+     * 根据类型查询分类
+     * @param type
+     * @return
+     */
+    @Override
+    public List<Category> list(Integer type) {
+        return categoryMapper.list(type);
+    }
 }

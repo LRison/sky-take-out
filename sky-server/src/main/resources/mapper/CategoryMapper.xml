@@ -8,7 +8,7 @@
         select * from category
         <where>
             <if test="name != null and name !=''">
-                and name like contact('%',#{name},'%')
+                and name like concat('%',#{name},'%')
             </if>
             <if test="type !=null">
                 and type =#{type}
@@ -17,7 +17,7 @@
         order by sort asc, create_time desc
     </select>
 
-<!--  跟新-->
+    <!--  更新-->
     <update id="update" parameterType="category">
         update category
         <set>
@@ -28,7 +28,17 @@
             <if test="updateUser !=null">update_user = #{updateUser},</if>
             <if test="status !=null">status = #{status},</if>
         </set>
-            where id =#{id}
+        where id =#{id}
     </update>
+ <!--根据类型查询分类-->
+    <select id="list" resultType="Category">
+        select * from category
+        where status =1
+        <if test="type !=null">
+            and type=#{type}
+        </if>
+          order by sort ,create_time desc
+    </select>
+
 
 </mapper>

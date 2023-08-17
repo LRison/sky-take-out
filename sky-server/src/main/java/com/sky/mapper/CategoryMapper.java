@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * @author Rison
  * @Date 2023/8/17 8:38
@@ -44,5 +46,10 @@ public interface CategoryMapper {
     @Delete("delete from category where id =#{id}")
     void deleteById(Long id);
 
-
+    /**
+     * 根据类型查询分类
+     * @param type
+     * @return
+     */
+    List<Category> list(Integer type);
 }
