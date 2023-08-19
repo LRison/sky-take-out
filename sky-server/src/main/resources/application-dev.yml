@@ -6,3 +6,8 @@ sky:
     database: sky_take_out
     username: root
     password: 3411131319lzy
+  alioss:
+    endpoint: oss-cn-hangzhou.aliyuncs.com
+    access-key-id: LTAI5tRtAWfHmsig6QgVb9yX
+    access-key-secret: NSiKbplxo9GWurheZnDp2L23BNXzY4
+    bucket-name: rison-study
